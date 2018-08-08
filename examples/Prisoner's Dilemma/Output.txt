@@ -1,0 +1,54 @@
+Saving checkpoint to neat-checkpoint-199
+
+Best genome:
+Key: 530
+Fitness: 0.0
+Nodes:
+        0 DefaultNodeGene(key=0, bias=-1.0817335111186877, response=1.0, activation=sigmoid, aggregation=sum)
+        1 DefaultNodeGene(key=1, bias=-1.0515950309926192, response=1.0, activation=relu, aggregation=sum)
+        128 DefaultNodeGene(key=128, bias=0.5667413109795459, response=1.0, activation=sigmoid, aggregation=sum)
+        129 DefaultNodeGene(key=129, bias=-0.41475413664993777, response=1.0, activation=log, aggregation=sum)
+        130 DefaultNodeGene(key=130, bias=0.8677017211994476, response=1.0, activation=sigmoid, aggregation=sum)
+        523 DefaultNodeGene(key=523, bias=0.24699953534562322, response=1.0, activation=log, aggregation=sum)
+Connections:
+        DefaultConnectionGene(key=(-3, 0), weight=0.8564824305473111, enabled=True)
+        DefaultConnectionGene(key=(-3, 1), weight=-0.7346042444893499, enabled=True)
+        DefaultConnectionGene(key=(-3, 128), weight=0.08768898035571362, enabled=True)
+        DefaultConnectionGene(key=(-3, 129), weight=-0.7557139173053069, enabled=True)
+        DefaultConnectionGene(key=(-3, 130), weight=0.21061596966266405, enabled=True)
+        DefaultConnectionGene(key=(-2, 0), weight=0.2065756056861867, enabled=True)
+        DefaultConnectionGene(key=(-2, 1), weight=-1.0, enabled=False)
+        DefaultConnectionGene(key=(-2, 128), weight=-1.0, enabled=True)
+        DefaultConnectionGene(key=(-2, 129), weight=-1.0, enabled=True)
+        DefaultConnectionGene(key=(-2, 130), weight=-1.0, enabled=True)
+        DefaultConnectionGene(key=(-2, 523), weight=0.8841071326652303, enabled=True)
+        DefaultConnectionGene(key=(-1, 0), weight=1.0, enabled=True)
+        DefaultConnectionGene(key=(-1, 1), weight=0.0037527892644423355, enabled=True)
+        DefaultConnectionGene(key=(-1, 128), weight=1.0, enabled=True)
+        DefaultConnectionGene(key=(-1, 129), weight=-0.7829890911337, enabled=True)
+        DefaultConnectionGene(key=(-1, 130), weight=0.8365392179209455, enabled=True)
+        DefaultConnectionGene(key=(128, 0), weight=0.2961405479336938, enabled=True)
+        DefaultConnectionGene(key=(128, 1), weight=0.8538273968013321, enabled=True)
+        DefaultConnectionGene(key=(129, 0), weight=-0.9174867626124441, enabled=True)
+        DefaultConnectionGene(key=(129, 1), weight=0.46227005103770247, enabled=True)
+        DefaultConnectionGene(key=(130, 0), weight=-0.54121167046649, enabled=True)
+        DefaultConnectionGene(key=(130, 1), weight=-0.7777477003263733, enabled=True)
+        DefaultConnectionGene(key=(523, 1), weight=-1.0, enabled=True)
+
+Test Output, Actual, Diff:
+----------    Test Winner   ---------------------------------
+History: Unknown Unknown Unknown -----> Action: Stay Silent
+History: Unknown Unknown Confess -----> Action: Stay Silent
+History: Unknown Unknown Silent -----> Action: Stay Silent
+History: Unknown Confess Confess -----> Action: Confess
+History: Unknown Confess Silent -----> Action: Confess
+History: Unknown Silent Confess -----> Action: Confess
+History: Unknown Silent Silent -----> Action: Confess
+History: Confess Confess Confess -----> Action: Confess
+History: Confess Confess Silent -----> Action: Confess
+History: Confess Silent Confess -----> Action: Confess
+History: Confess Silent Silent -----> Action: Confess
+History: Silent Confess Confess -----> Action: Confess
+History: Silent Confess Silent -----> Action: Confess
+History: Silent Silent Confess -----> Action: Confess
+History: Silent Silent Silent -----> Action: Confess

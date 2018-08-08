@@ -1,0 +1,16 @@
+digraph {
+	node [fontsize=9 height=0.2 shape=circle width=0.2]
+	In [fillcolor=lightgray shape=box style=filled]
+	Confess [fillcolor=lightblue style=filled]
+	Silent [fillcolor=lightblue style=filled]
+	2655 [fillcolor=white style=filled]
+	432 [fillcolor=white style=filled]
+	2824 [fillcolor=white style=filled]
+	432 -> Confess [color=red penwidth=0.2898292090375098 style=dotted]
+	In -> Confess [color=green penwidth=0.30000000000000004 style=solid]
+	Confess -> 2655 [color=red penwidth=0.16949594191105305 style=solid]
+	2824 -> 432 [color=red penwidth=0.13508008181803835 style=solid]
+	In -> 2824 [color=green penwidth=0.30000000000000004 style=solid]
+	2655 -> Silent [color=green penwidth=0.30000000000000004 style=solid]
+	In -> 432 [color=red penwidth=0.18405103110862292 style=dotted]
+}
