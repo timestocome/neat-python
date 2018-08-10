@@ -30,7 +30,7 @@ import matplotlib.pyplot as plt
 # main code
 ########################################################################################
 
-n_generations = 200         # how many times to evolve bots
+n_generations = 50          # how many times to evolve bots
 bots = []                   # keep bots here to make code clearer
 
 n_history = 3               # how far back in foe's history do we use to judge him?
@@ -62,23 +62,23 @@ history = {}
 def score(my_action, foe_action):
 
     if (my_action == C) and (foe_action == C):
-        return -3
+        return 3 
 
     if (my_action == S) and (foe_action == S):
-        return  -2
+        return  2 
 
     if (my_action == C) and (foe_action == S):
-        return 0
+        return 0 
 
     if (my_action == S) and (foe_action == C):
-        return -5
+        return 5 
 
 
 # figure out best action based on number of years I recieved and return 
 # it so network can be trained 
 def best_action(action, score):
     
-    if score > -2:    # bot picked best action
+    if score <= 2:    # bot picked best action
         if action == C:     return [1, 0]
         else:               return [0, 1]        
     else:               # bot chose wrong action
@@ -95,13 +95,13 @@ def eval_genomes(genomes, config):
     ids = []
     nets = {}
 
-    
-    # reset everything
     ids = []
     for genome_id, genome in genomes:
         
         genome.fitness = 0.
-        nets[str(genome_id)] = neat.nn.FeedForwardNetwork.create(genome, config) 
+        #nets[str(genome_id)] = neat.nn.FeedForwardNetwork.create(genome, config)
+        nets[str(genome_id)] = neat.nn.RecurrentNetwork.create(genome, config)
+
         history[str(genome_id)] =  [-1] * n_history
         ids.append(genome_id)
 
@@ -112,6 +112,9 @@ def eval_genomes(genomes, config):
 
     # play a round        
     for genome_id, genome in genomes:
+        
+        genome.fitness = 0.
+
         for f in range(len(genomes)):
             
             foe_id, foe_genome = genomes[f]
@@ -132,7 +135,10 @@ def eval_genomes(genomes, config):
             my_score = score(my_action, foe_action)
             foe_score = score(foe_action, my_action)
 
+            genome.fitness -= score(my_action, foe_action) 
+            foe_genome.fitness -= score(foe_action, my_action) 
 
+            '''
             # get best action for updating genome
             my_best_action = best_action(my_action, my_score)
             foe_best_action = best_action(foe_action, foe_score)
@@ -140,7 +146,7 @@ def eval_genomes(genomes, config):
 
             genome.fitness -= (np.sum(np.subtract(my_output, my_best_action)) ) **2
             foe_genome.fitness -= (np.sum(np.subtract(foe_output, foe_best_action)) ) **2
-     
+            '''
     
 
 
@@ -177,7 +183,9 @@ def run():
     
     # show output of winner against test data
     print('\nTest Output, Actual, Diff:')
-    winner_net = neat.nn.FeedForwardNetwork.create(winner, config)
+    winner_net = neat.nn.RecurrentNetwork.create(winner, config)
+    #winner_net = neat.nn.FeedForwardNetwork.create(winner, config)
+
 
     
     test_x = [[-1, -1, -1],
@@ -197,8 +205,17 @@ def run():
             [1, 1, 1]
             ]
 
+    '''
 
-
+    test_x = [[-1, -1],
+            [-1, 0],
+            [-1, 1],
+            [0, 0],
+            [0, 1],
+            [1, 0],
+            [1, 1]
+            ]
+    '''
     predicted = []
     for xi in test_x:
         output = winner_net.activate(xi)
@@ -215,6 +232,7 @@ def run():
         in_1 = history[1] + 1
         in_2 = history[2] + 1
         print('History: %s %s %s -----> Action: %s  ' % (inputs[in_0], inputs[in_1], inputs[in_2], actions[predicted[i]]))
+        #print('History: %s %s -----> Action: %s  ' % (inputs[in_0], inputs[in_1], actions[predicted[i]]))
 
         
 
@@ -238,3 +256,13 @@ def run():
 # run code
 #######################################################################################
 run()
+
+
+
+actions = ['Confess', 'Stay Silent']
+for k in history:
+    print('--------------------', k)
+
+    for v in history[k]:
+        print( actions[v[-3]], actions[v[-2]], actions[v[-1]]) 
+    
